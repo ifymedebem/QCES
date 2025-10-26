@@ -1,0 +1,41 @@
+import time
+import numpy as np
+
+ET =  0.3  # Error tolerance
+dt_values = (1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01)
+
+EE_Normal_Error = {}
+CN_Normal_Error = {}
+
+
+for dt in dt_values:
+    dt_key = float(dt)
+    Uc_EE = c_EE 
+    Uc_exact = c_exact 
+       
+    EE_Normal_Error[dt_key] = np.abs(Uc_exact - Uc_EE)
+    start_time = time.time()
+    EE_Global_Error = np.mean(np.abs(EE_Normal_Error[dt_key]))  
+    end_time = time.time()
+    print(f"dt = {dt_key}, Explicit Euler Global Error = {EE_Global_Error:.6f}")
+    if EE_Global_Error < ET:
+      print(f"Explicit Euler reached error < {ET} with dt = {dt_key}")
+      print(f"Time taken: {end_time - start_time:.4f} seconds")
+      break
+
+for dt in dt_values:
+    dt_key = float(dt)
+    Uc_CN = c_CN  
+    Uc_exact = c_exact 
+       
+    CN_Normal_Error[dt_key] = np.abs(Uc_exact - Uc_CN)
+
+    start_time = time.time()
+    CN_Global_Error = np.mean(np.abs(CN_Normal_Error[dt_key]))
+    end_time = time.time()
+    #print (CN_Global_Error)
+    
+    if CN_Global_Error < ET:
+        print(f"Crank-Nicolson reached error < {ET} with dt = {dt_key}")
+        print(f"Time taken: {end_time - start_time:.4f} seconds")
+        break
